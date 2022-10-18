@@ -65,8 +65,8 @@ const Musiques = () => {
   return (
     <div>
       musiques
-      <SearchBox onSearchBoxChange={onSearchChangeTitre} placeHolder="Rechercher titre" />
-      <SearchBox onSearchBoxChange={onSearchChangeAuteur} placeHolder="Rechercher auteur" />
+      <SearchBox onSearchBoxChange={onSearchChangeTitre} placeHolder="titre" />
+      <SearchBox onSearchBoxChange={onSearchChangeAuteur} placeHolder="auteur" />
       <CardList oeuvres={filteredMusiques} />
     </div>
   );

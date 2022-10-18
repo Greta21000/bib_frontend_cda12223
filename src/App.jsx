@@ -4,6 +4,8 @@ import "./App.css";
 import Header from "./header/Header";
 import Films from './pages/Films'
 import Musiques from "./pages/musiques";
+import NewItem from "./pages/NewItem";
+import UpdateItem from "./pages/UpdateItem";
 
 function App() {
   return (
@@ -19,6 +21,12 @@ function App() {
         </Route>
         <Route path="/films" exact>
           <Films />
+        </Route>
+        <Route path="/newitem" exact>
+          <NewItem />
+        </Route>
+        <Route path="/updateitem" exact>
+          <UpdateItem />
         </Route>
       </Router>
     </div>
