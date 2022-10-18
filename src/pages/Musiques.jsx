@@ -59,7 +59,7 @@ const Musiques = () => {
   );
 
   const filteredMusiques = filteredMusiquesTitre.filter((m) =>
-  m.titre.toLowerCase().includes(searchFieldAuteur.toLowerCase())
+  m.auteur.toLowerCase().includes(searchFieldAuteur.toLowerCase())
 );
 
   return (
