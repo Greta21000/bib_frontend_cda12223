@@ -39,23 +39,34 @@ let MUSIQUES = [
 ];
 
 const Musiques = () => {
-  const [searchField, setSearchField] = useState("");
+  const [searchFieldTitre, setSearchFieldTitre] = useState("");
+  const [searchFieldAuteur, setSearchFieldAuteur] = useState("");
 //   const [musiques, setMusiques] = useState(MUSIQUES);
 
 
-  const onSearchChange = (event) => {
-    setSearchField(event.target.value);
-    console.log(searchField);
+  const onSearchChangeTitre = (event) => {
+    setSearchFieldTitre(event.target.value);
+    console.log(searchFieldTitre);
   };
 
-  const filteredMusiques = MUSIQUES.filter((m) =>
-    m.titre.toLowerCase().includes(searchField.toLowerCase())
+  const onSearchChangeAuteur = (event) => {
+    setSearchFieldAuteur(event.target.value);
+    console.log(searchFieldAuteur);
+  };
+
+  const filteredMusiquesTitre = MUSIQUES.filter((m) =>
+    m.titre.toLowerCase().includes(searchFieldTitre.toLowerCase())
   );
+
+  const filteredMusiques = filteredMusiquesTitre.filter((m) =>
+  m.titre.toLowerCase().includes(searchFieldAuteur.toLowerCase())
+);
 
   return (
     <div>
       musiques
-      <SearchBox onSearchBoxChange={onSearchChange} />
+      <SearchBox onSearchBoxChange={onSearchChangeTitre} placeHolder="Rechercher titre" />
+      <SearchBox onSearchBoxChange={onSearchChangeAuteur} placeHolder="Rechercher auteur" />
       <CardList oeuvres={filteredMusiques} />
     </div>
   );

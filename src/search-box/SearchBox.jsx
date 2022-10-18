@@ -6,7 +6,7 @@ const SearchBox = (props) => {
       <input
         className="search-box"
         type="search"
-        placeholder="Rechercher une oeuvre"
+        placeholder={props.placeHolder}
         onChange={props.onSearchBoxChange}
       />
     </div>
