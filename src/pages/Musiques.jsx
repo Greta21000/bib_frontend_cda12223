@@ -41,8 +41,7 @@ let MUSIQUES = [
 const Musiques = () => {
   const [searchFieldTitre, setSearchFieldTitre] = useState("");
   const [searchFieldAuteur, setSearchFieldAuteur] = useState("");
-//   const [musiques, setMusiques] = useState(MUSIQUES);
-
+  const [musiques, setMusiques] = useState(MUSIQUES);
 
   const onSearchChangeTitre = (event) => {
     setSearchFieldTitre(event.target.value);
@@ -54,20 +53,30 @@ const Musiques = () => {
     console.log(searchFieldAuteur);
   };
 
-  const filteredMusiquesTitre = MUSIQUES.filter((m) =>
+  const filteredMusiquesTitre = musiques.filter((m) =>
     m.titre.toLowerCase().includes(searchFieldTitre.toLowerCase())
   );
 
   const filteredMusiques = filteredMusiquesTitre.filter((m) =>
-  m.auteur.toLowerCase().includes(searchFieldAuteur.toLowerCase())
-);
+    m.auteur.toLowerCase().includes(searchFieldAuteur.toLowerCase())
+  );
+
+  const itemDeleteHandler = (deletedItemId) => {
+    console.log(deletedItemId);
+    setMusiques((prevMusiques) => 
+      prevMusiques.filter((musique) => musique.id !== deletedItemId)
+    );
+  };
 
   return (
     <div>
       musiques
       <SearchBox onSearchBoxChange={onSearchChangeTitre} placeHolder="titre" />
-      <SearchBox onSearchBoxChange={onSearchChangeAuteur} placeHolder="auteur" />
-      <CardList oeuvres={filteredMusiques} />
+      <SearchBox
+        onSearchBoxChange={onSearchChangeAuteur}
+        placeHolder="auteur"
+      />
+      <CardList oeuvres={filteredMusiques} onDeleteItem={itemDeleteHandler} />
     </div>
   );
 };

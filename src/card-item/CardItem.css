@@ -20,3 +20,35 @@
     height: 200px;
     width: 100%;
   }
+
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+    margin: 5px;
+  }
+  li {
+    margin: 1rem;
+  }
+  .card-item__actions a {
+    color: #292929;
+    text-decoration: none;
+  }
+  .card-item__actions button {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: #292929;
+    background: rgb(32, 136, 136);
+    text-decoration: none;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    width: 80px;
+  }
+   
+  .card-item__actions a:hover,
+  .card-item__actions button:hover {
+    background: #2faaa6;
+    /* border-color: #292929; */
+    color: #e9f8f7;
+  }
