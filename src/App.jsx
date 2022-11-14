@@ -5,7 +5,7 @@ import Header from "./header/Header";
 import Films from './pages/Films'
 import Musiques from "./pages/musiques";
 import NewItem from "./pages/NewItem";
-import UpdateItem from "./pages/UpdateItem";
+import UpdateItem2 from "./pages/UpdateItem2";
 
 function App() {
   return (
@@ -25,8 +25,8 @@ function App() {
         <Route path="/musique/new" exact>
           <NewItem />
         </Route>
-        <Route path="/updateitem" exact>
-          <UpdateItem />
+        <Route path="/updateitem/:oeuvreId" exact>
+          <UpdateItem2 route="musiques" />
         </Route>
       </Router>
     </div>

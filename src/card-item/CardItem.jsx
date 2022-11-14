@@ -2,15 +2,26 @@ import { NavLink } from "react-router-dom";
 import "./CardItem.css";
 
 const CardItem = (props) => {
-
-  const confirmDeleteHandler = () => {
-    console.log("Deleted");
-    props.onDelete(props.oeuvre.id);
-  }
+  const confirmDeleteHandler = async () => {
+    // console.log("Deleted");
+    try {
+      await fetch(`http://localhost:5000/api/musiques/${props.oeuvre.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }).catch((error) => {
+        console.log(error);
+      });
+      props.onDelete(props.oeuvre.id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     // Mon commentaire de container
-    <div className="card-container"> 
+    <div className="card-container">
       <img //commentaire de l'image
         alt={props.oeuvre.titre}
         className="image"
@@ -24,10 +35,12 @@ const CardItem = (props) => {
       <div className="card-item__actions">
         <ul>
           <li>
-            <button><NavLink to={`/updateitem`}>Editer</NavLink></button>
+            <button>
+              <NavLink to={`/updateitem/${props.oeuvre.id}`}>Editer</NavLink>
+            </button>
           </li>
           <li>
-            <button onClick={confirmDeleteHandler} >Supprimer</button>
+            <button onClick={confirmDeleteHandler}>Supprimer</button>
           </li>
         </ul>
       </div>
