@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import "./Item.css";
 
@@ -15,13 +16,34 @@ const NewItem = () => {
     // annee: "",
     // auteur: "",
     // imageUrl: "",
-  })
+  });
+  const history = useHistory();
 
-  const itemSubmitHandler = e => {
+  const itemSubmitHandler = (e) => {
     e.preventDefault();
     console.log(form);
-    console.log("Ok!")
-  }
+    // console.log("Ok!")
+    const addData = async () => {
+      try {
+        await fetch("http://localhost:5000/api/musiques/", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            titre: form.titre,
+            annee: form.annee,
+            auteur: form.auteur,
+            imageUrl: form.imageUrl,
+          }),
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      history.push(`/`)
+    };
+    addData();
+  };
 
   const handleChange = (e) => {
     setForm({
@@ -36,61 +58,63 @@ const NewItem = () => {
     let isFormValid = true;
     let errors = {};
 
-    if( itemToControl === "titre"){
-        if(!form.titre){
-            isFormValid=false;
-            errors.titre="Le titre doit être renseigné";
-        } else if (form.titre !== undefined){
-            if(!form.titre.match(/^[0-9a-zA-Z\-àé ]+$/)){
-                isFormValid=false;
-                errors.titre="Le titre ne doit contenir que des lettres ou des chiffres";
-            }
+    if (itemToControl === "titre") {
+      if (!form.titre) {
+        isFormValid = false;
+        errors.titre = "Le titre doit être renseigné";
+      } else if (form.titre !== undefined) {
+        if (!form.titre.match(/^[0-9a-zA-Z\-àé ]+$/)) {
+          isFormValid = false;
+          errors.titre =
+            "Le titre ne doit contenir que des lettres ou des chiffres";
         }
-        setErrorsForm({
-            ...errorsForm,
-            titre: errors.titre,
-            //errors
-          });
+      }
+      setErrorsForm({
+        ...errorsForm,
+        titre: errors.titre,
+        //errors
+      });
     }
 
-    if( itemToControl === "annee"){
-        if(!form.annee){
-            isFormValid=false;
-            errors.annee="L'année doit être renseigné";
-        } else if (form.annee !== undefined){
-            if(!form.annee.match(/^[0-9]+$/)){
-                isFormValid=false;
-                errors.annee="L'année doit contenir que des chiffres sur 4 caractères !";
-            }
+    if (itemToControl === "annee") {
+      if (!form.annee) {
+        isFormValid = false;
+        errors.annee = "L'année doit être renseigné";
+      } else if (form.annee !== undefined) {
+        if (!form.annee.match(/^[0-9]+$/)) {
+          isFormValid = false;
+          errors.annee =
+            "L'année doit contenir que des chiffres sur 4 caractères !";
         }
-        setErrorsForm({
-            ...errorsForm,
-            annee: errors.annee,
-            //errors
-          });
+      }
+      setErrorsForm({
+        ...errorsForm,
+        annee: errors.annee,
+        //errors
+      });
     }
 
-    if( itemToControl === "auteur"){
-        if(!form.auteur){
-            isFormValid=false;
-            errors.auteur="L'auteur doit être renseigné";
-        } else if (form.auteur !== undefined){
-            if(!form.auteur.match(/^[0-9a-zA-Z\-àé ]+$/)){
-                isFormValid=false;
-                errors.auteur="L'auteur doit contenir que des lettres ou des chiffres !";
-            }
+    if (itemToControl === "auteur") {
+      if (!form.auteur) {
+        isFormValid = false;
+        errors.auteur = "L'auteur doit être renseigné";
+      } else if (form.auteur !== undefined) {
+        if (!form.auteur.match(/^[0-9a-zA-Z\-àé ]+$/)) {
+          isFormValid = false;
+          errors.auteur =
+            "L'auteur doit contenir que des lettres ou des chiffres !";
         }
-        setErrorsForm({
-            ...errorsForm,
-            auteur: errors.auteur,
-            //errors
-          });
+      }
+      setErrorsForm({
+        ...errorsForm,
+        auteur: errors.auteur,
+        //errors
+      });
     }
 
     console.log(errorsForm);
     return isFormValid;
-
-  }
+  };
 
   return (
     <div className="div-tag">
